@@ -1,8 +1,8 @@
 # uniswap
 **uniswap** is a blockchain built using Cosmos SDK and Tendermint and created with [Starport](https://github.com/tendermint/starport).
 
-'''
-# make your swap-chain from sketch 
+```
+//make your swap-chain from sketch 
 starport scaffold chain github.com/robert-trifffin/uniswap --address-prefix uni
 cd uniswap
 
@@ -36,7 +36,7 @@ uniswapd q uniswap show-pool
 //check user's lp token count
 starport s list User amount:uint
 
-'''
+```
 
 
 
