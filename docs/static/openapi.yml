@@ -19475,6 +19475,58 @@ paths:
           format: uint64
       tags:
         - Query
+  /robert-trifffin/uniswap/uniswap/pool:
+    get:
+      summary: Queries a pool by index.
+      operationId: RoberttrifffinUniswapUniswapPool
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Pool:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  address:
+                    type: string
+                  denom1:
+                    type: string
+                  denom2:
+                    type: string
+                  amount1:
+                    type: string
+                    format: uint64
+                  amount2:
+                    type: string
+                    format: uint64
+                  total:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    typeUrl:
+                      type: string
+                    value:
+                      type: string
+                      format: byte
+      tags:
+        - Query
 definitions:
   cosmos.bank.v1beta1.DenomUnit:
     type: object
@@ -29761,3 +29813,56 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  roberttrifffin.uniswap.uniswap.MsgAddLiqudityResponse:
+    type: object
+  roberttrifffin.uniswap.uniswap.MsgCreatePoolResponse:
+    type: object
+  roberttrifffin.uniswap.uniswap.MsgDeletePoolResponse:
+    type: object
+  roberttrifffin.uniswap.uniswap.MsgRemoveLiqudityResponse:
+    type: object
+  roberttrifffin.uniswap.uniswap.MsgUpdatePoolResponse:
+    type: object
+  roberttrifffin.uniswap.uniswap.Pool:
+    type: object
+    properties:
+      creator:
+        type: string
+      address:
+        type: string
+      denom1:
+        type: string
+      denom2:
+        type: string
+      amount1:
+        type: string
+        format: uint64
+      amount2:
+        type: string
+        format: uint64
+      total:
+        type: string
+        format: uint64
+  roberttrifffin.uniswap.uniswap.QueryGetPoolResponse:
+    type: object
+    properties:
+      Pool:
+        type: object
+        properties:
+          creator:
+            type: string
+          address:
+            type: string
+          denom1:
+            type: string
+          denom2:
+            type: string
+          amount1:
+            type: string
+            format: uint64
+          amount2:
+            type: string
+            format: uint64
+          total:
+            type: string
+            format: uint64

@@ -4,12 +4,24 @@ package roberttrifffin.uniswap.uniswap;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 // this line is used by starport scaffolding # 1
+import "uniswap/pool.proto";
 
 option go_package = "github.com/robert-trifffin/uniswap/x/uniswap/types";
 
 // Query defines the gRPC querier service.
 service Query {
     // this line is used by starport scaffolding # 2
+
+	// Queries a pool by index.
+	rpc Pool(QueryGetPoolRequest) returns (QueryGetPoolResponse) {
+		option (google.api.http).get = "/robert-trifffin/uniswap/uniswap/pool";
+	}
+
 }
 
 // this line is used by starport scaffolding # 3
+message QueryGetPoolRequest {}
+
+message QueryGetPoolResponse {
+	Pool Pool = 1;
+}

@@ -10,6 +10,10 @@ import (
 // state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// this line is used by starport scaffolding # genesis/module/init
+	// Set if defined
+	if genState.Pool != nil {
+		k.SetPool(ctx, *genState.Pool)
+	}
 
 	// this line is used by starport scaffolding # ibc/genesis/init
 }
@@ -19,6 +23,11 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 
 	// this line is used by starport scaffolding # genesis/module/export
+	// Get all pool
+	pool, found := k.GetPool(ctx)
+	if found {
+		genesis.Pool = &pool
+	}
 
 	// this line is used by starport scaffolding # ibc/genesis/export
 

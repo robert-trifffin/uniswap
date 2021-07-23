@@ -2,12 +2,63 @@ syntax = "proto3";
 package roberttrifffin.uniswap.uniswap;
 
 // this line is used by starport scaffolding # proto/tx/import
+import "uniswap/pool.proto";
 
 option go_package = "github.com/robert-trifffin/uniswap/x/uniswap/types";
 
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
+  rpc RemoveLiqudity(MsgRemoveLiqudity) returns (MsgRemoveLiqudityResponse);
+  rpc AddLiqudity(MsgAddLiqudity) returns (MsgAddLiqudityResponse);
+  rpc CreatePool(MsgCreatePool) returns (MsgCreatePoolResponse);
+  rpc UpdatePool(MsgUpdatePool) returns (MsgUpdatePoolResponse);
+  rpc DeletePool(MsgDeletePool) returns (MsgDeletePoolResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
+message MsgRemoveLiqudity {
+  string creator = 1;
+  uint64 amount = 2;
+}
+
+message MsgRemoveLiqudityResponse {
+}
+
+message MsgAddLiqudity {
+  string creator = 1;
+  string denom1 = 2;
+  string denom2 = 3;
+  uint64 amount1 = 4;
+  uint64 amount2 = 5;
+}
+
+message MsgAddLiqudityResponse {
+}
+
+message MsgCreatePool {
+  string creator = 1;
+  string address = 3;
+  string denom1 = 4;
+  string denom2 = 5;
+  uint64 amount1 = 6;
+  uint64 amount2 = 7;
+  uint64 total = 8;
+}
+message MsgCreatePoolResponse { }
+
+message MsgUpdatePool {
+  string creator = 1;
+  string address = 3;
+  string denom1 = 4;
+  string denom2 = 5;
+  uint64 amount1 = 6;
+  uint64 amount2 = 7;
+  uint64 total = 8;
+}
+message MsgUpdatePoolResponse { }
+
+message MsgDeletePool {
+  string creator = 1;
+}
+message MsgDeletePoolResponse { }

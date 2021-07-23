@@ -83,6 +83,7 @@ import (
 	"github.com/robert-trifffin/uniswap/docs"
 	tmjson "github.com/tendermint/tendermint/libs/json"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 	uniswapmodule "github.com/robert-trifffin/uniswap/x/uniswap"
 	uniswapmodulekeeper "github.com/robert-trifffin/uniswap/x/uniswap/keeper"
@@ -342,6 +343,8 @@ func New(
 		appCodec,
 		keys[uniswapmoduletypes.StoreKey],
 		keys[uniswapmoduletypes.MemStoreKey],
+		app.AccountKeeper,
+		app.BankKeeper,
 	)
 	uniswapModule := uniswapmodule.NewAppModule(appCodec, app.UniswapKeeper)
 

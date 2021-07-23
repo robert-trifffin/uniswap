@@ -30,6 +30,13 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	// this line is used by starport scaffolding # 1
+	cmd.AddCommand(CmdRemoveLiqudity())
+
+	cmd.AddCommand(CmdAddLiqudity())
+
+	cmd.AddCommand(CmdCreatePool())
+	cmd.AddCommand(CmdUpdatePool())
+	cmd.AddCommand(CmdDeletePool())
 
 	return cmd
 }

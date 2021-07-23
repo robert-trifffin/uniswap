@@ -8,7 +8,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/robert-trifffin/uniswap/x/uniswap/types"
+
 	// this line is used by starport scaffolding # ibc/keeper/import
+	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
+	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 )
 
 type (
@@ -17,7 +20,8 @@ type (
 		storeKey sdk.StoreKey
 		memKey   sdk.StoreKey
 		// this line is used by starport scaffolding # ibc/keeper/attribute
-
+		accountKeeper authkeeper.AccountKeeper
+		bankKeeper    bankkeeper.Keeper
 	}
 )
 
@@ -26,6 +30,8 @@ func NewKeeper(
 	storeKey,
 	memKey sdk.StoreKey,
 	// this line is used by starport scaffolding # ibc/keeper/parameter
+	ak authkeeper.AccountKeeper,
+	bk bankkeeper.Keeper,
 
 ) *Keeper {
 	return &Keeper{
@@ -33,7 +39,8 @@ func NewKeeper(
 		storeKey: storeKey,
 		memKey:   memKey,
 		// this line is used by starport scaffolding # ibc/keeper/return
-
+		accountKeeper: ak,
+		bankKeeper:    bk,
 	}
 }
 
