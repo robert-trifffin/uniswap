@@ -28,3 +28,8 @@ func KeyPrefix(p string) []byte {
 const (
 	PoolKey = "Pool-value-"
 )
+
+const (
+	UserKey      = "User-value-"
+	UserCountKey = "User-count-"
+)

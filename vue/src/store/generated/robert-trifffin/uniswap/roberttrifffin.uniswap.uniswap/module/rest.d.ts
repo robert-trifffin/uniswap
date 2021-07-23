@@ -11,9 +11,15 @@ export interface RpcStatus {
 }
 export declare type UniswapMsgAddLiqudityResponse = object;
 export declare type UniswapMsgCreatePoolResponse = object;
+export interface UniswapMsgCreateUserResponse {
+    /** @format uint64 */
+    id?: string;
+}
 export declare type UniswapMsgDeletePoolResponse = object;
+export declare type UniswapMsgDeleteUserResponse = object;
 export declare type UniswapMsgRemoveLiqudityResponse = object;
 export declare type UniswapMsgUpdatePoolResponse = object;
+export declare type UniswapMsgUpdateUserResponse = object;
 export interface UniswapPool {
     creator?: string;
     address?: string;
@@ -26,8 +32,81 @@ export interface UniswapPool {
     /** @format uint64 */
     total?: string;
 }
+export interface UniswapQueryAllUserResponse {
+    User?: UniswapUser[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
+}
 export interface UniswapQueryGetPoolResponse {
     Pool?: UniswapPool;
+}
+export interface UniswapQueryGetUserResponse {
+    User?: UniswapUser;
+}
+export interface UniswapUser {
+    creator?: string;
+    /** @format uint64 */
+    id?: string;
+    /** @format uint64 */
+    amount?: string;
+}
+/**
+* message SomeRequest {
+         Foo some_parameter = 1;
+         PageRequest pagination = 2;
+ }
+*/
+export interface V1Beta1PageRequest {
+    /**
+     * key is a value returned in PageResponse.next_key to begin
+     * querying the next page most efficiently. Only one of offset or key
+     * should be set.
+     * @format byte
+     */
+    key?: string;
+    /**
+     * offset is a numeric offset that can be used when key is unavailable.
+     * It is less efficient than using key. Only one of offset or key should
+     * be set.
+     * @format uint64
+     */
+    offset?: string;
+    /**
+     * limit is the total number of results to be returned in the result page.
+     * If left empty it will default to a value to be set by each app.
+     * @format uint64
+     */
+    limit?: string;
+    /**
+     * count_total is set to true  to indicate that the result set should include
+     * a count of the total number of items available for pagination in UIs.
+     * count_total is only respected when offset is used. It is ignored when key
+     * is set.
+     */
+    countTotal?: boolean;
+}
+/**
+* PageResponse is to be embedded in gRPC response messages where the
+corresponding request message has used PageRequest.
+
+ message SomeResponse {
+         repeated Bar results = 1;
+         PageResponse page = 2;
+ }
+*/
+export interface V1Beta1PageResponse {
+    /** @format byte */
+    nextKey?: string;
+    /** @format uint64 */
+    total?: string;
 }
 export declare type QueryParamsType = Record<string | number, any>;
 export declare type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -96,5 +175,28 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/robert-trifffin/uniswap/uniswap/pool
      */
     queryPool: (params?: RequestParams) => Promise<HttpResponse<UniswapQueryGetPoolResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryUserAll
+     * @summary Queries a list of user items.
+     * @request GET:/robert-trifffin/uniswap/uniswap/user
+     */
+    queryUserAll: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<UniswapQueryAllUserResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryUser
+     * @summary Queries a user by id.
+     * @request GET:/robert-trifffin/uniswap/uniswap/user/{id}
+     */
+    queryUser: (id: string, params?: RequestParams) => Promise<HttpResponse<UniswapQueryGetUserResponse, RpcStatus>>;
 }
 export {};

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package roberttrifffin.uniswap.uniswap;
+
+option go_package = "github.com/robert-trifffin/uniswap/x/uniswap/types";
+
+import "gogoproto/gogo.proto";
+
+message User {
+  string creator = 1;
+  uint64 id = 2;
+  uint64 amount = 3; 
+}

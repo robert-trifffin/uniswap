@@ -5,6 +5,30 @@ import * as Long from 'long'
 export const protobufPackage = 'roberttrifffin.uniswap.uniswap'
 
 /** this line is used by starport scaffolding # proto/tx/message */
+export interface MsgCreateUser {
+  creator: string
+  amount: number
+}
+
+export interface MsgCreateUserResponse {
+  id: number
+}
+
+export interface MsgUpdateUser {
+  creator: string
+  id: number
+  amount: number
+}
+
+export interface MsgUpdateUserResponse {}
+
+export interface MsgDeleteUser {
+  creator: string
+  id: number
+}
+
+export interface MsgDeleteUserResponse {}
+
 export interface MsgRemoveLiqudity {
   creator: string
   amount: number
@@ -51,6 +75,370 @@ export interface MsgDeletePool {
 }
 
 export interface MsgDeletePoolResponse {}
+
+const baseMsgCreateUser: object = { creator: '', amount: 0 }
+
+export const MsgCreateUser = {
+  encode(message: MsgCreateUser, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== '') {
+      writer.uint32(10).string(message.creator)
+    }
+    if (message.amount !== 0) {
+      writer.uint32(16).uint64(message.amount)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreateUser {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgCreateUser } as MsgCreateUser
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string()
+          break
+        case 2:
+          message.amount = longToNumber(reader.uint64() as Long)
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgCreateUser {
+    const message = { ...baseMsgCreateUser } as MsgCreateUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator)
+    } else {
+      message.creator = ''
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount)
+    } else {
+      message.amount = 0
+    }
+    return message
+  },
+
+  toJSON(message: MsgCreateUser): unknown {
+    const obj: any = {}
+    message.creator !== undefined && (obj.creator = message.creator)
+    message.amount !== undefined && (obj.amount = message.amount)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateUser>): MsgCreateUser {
+    const message = { ...baseMsgCreateUser } as MsgCreateUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator
+    } else {
+      message.creator = ''
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount
+    } else {
+      message.amount = 0
+    }
+    return message
+  }
+}
+
+const baseMsgCreateUserResponse: object = { id: 0 }
+
+export const MsgCreateUserResponse = {
+  encode(message: MsgCreateUserResponse, writer: Writer = Writer.create()): Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgCreateUserResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgCreateUserResponse } as MsgCreateUserResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long)
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgCreateUserResponse {
+    const message = { ...baseMsgCreateUserResponse } as MsgCreateUserResponse
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id)
+    } else {
+      message.id = 0
+    }
+    return message
+  },
+
+  toJSON(message: MsgCreateUserResponse): unknown {
+    const obj: any = {}
+    message.id !== undefined && (obj.id = message.id)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateUserResponse>): MsgCreateUserResponse {
+    const message = { ...baseMsgCreateUserResponse } as MsgCreateUserResponse
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = 0
+    }
+    return message
+  }
+}
+
+const baseMsgUpdateUser: object = { creator: '', id: 0, amount: 0 }
+
+export const MsgUpdateUser = {
+  encode(message: MsgUpdateUser, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== '') {
+      writer.uint32(10).string(message.creator)
+    }
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id)
+    }
+    if (message.amount !== 0) {
+      writer.uint32(24).uint64(message.amount)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgUpdateUser {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgUpdateUser } as MsgUpdateUser
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string()
+          break
+        case 2:
+          message.id = longToNumber(reader.uint64() as Long)
+          break
+        case 3:
+          message.amount = longToNumber(reader.uint64() as Long)
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgUpdateUser {
+    const message = { ...baseMsgUpdateUser } as MsgUpdateUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator)
+    } else {
+      message.creator = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id)
+    } else {
+      message.id = 0
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount)
+    } else {
+      message.amount = 0
+    }
+    return message
+  },
+
+  toJSON(message: MsgUpdateUser): unknown {
+    const obj: any = {}
+    message.creator !== undefined && (obj.creator = message.creator)
+    message.id !== undefined && (obj.id = message.id)
+    message.amount !== undefined && (obj.amount = message.amount)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateUser>): MsgUpdateUser {
+    const message = { ...baseMsgUpdateUser } as MsgUpdateUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator
+    } else {
+      message.creator = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = 0
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount
+    } else {
+      message.amount = 0
+    }
+    return message
+  }
+}
+
+const baseMsgUpdateUserResponse: object = {}
+
+export const MsgUpdateUserResponse = {
+  encode(_: MsgUpdateUserResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgUpdateUserResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgUpdateUserResponse } as MsgUpdateUserResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgUpdateUserResponse {
+    const message = { ...baseMsgUpdateUserResponse } as MsgUpdateUserResponse
+    return message
+  },
+
+  toJSON(_: MsgUpdateUserResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateUserResponse>): MsgUpdateUserResponse {
+    const message = { ...baseMsgUpdateUserResponse } as MsgUpdateUserResponse
+    return message
+  }
+}
+
+const baseMsgDeleteUser: object = { creator: '', id: 0 }
+
+export const MsgDeleteUser = {
+  encode(message: MsgDeleteUser, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== '') {
+      writer.uint32(10).string(message.creator)
+    }
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgDeleteUser {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgDeleteUser } as MsgDeleteUser
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string()
+          break
+        case 2:
+          message.id = longToNumber(reader.uint64() as Long)
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgDeleteUser {
+    const message = { ...baseMsgDeleteUser } as MsgDeleteUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator)
+    } else {
+      message.creator = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id)
+    } else {
+      message.id = 0
+    }
+    return message
+  },
+
+  toJSON(message: MsgDeleteUser): unknown {
+    const obj: any = {}
+    message.creator !== undefined && (obj.creator = message.creator)
+    message.id !== undefined && (obj.id = message.id)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgDeleteUser>): MsgDeleteUser {
+    const message = { ...baseMsgDeleteUser } as MsgDeleteUser
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator
+    } else {
+      message.creator = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = 0
+    }
+    return message
+  }
+}
+
+const baseMsgDeleteUserResponse: object = {}
+
+export const MsgDeleteUserResponse = {
+  encode(_: MsgDeleteUserResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgDeleteUserResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgDeleteUserResponse } as MsgDeleteUserResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgDeleteUserResponse {
+    const message = { ...baseMsgDeleteUserResponse } as MsgDeleteUserResponse
+    return message
+  },
+
+  toJSON(_: MsgDeleteUserResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgDeleteUserResponse>): MsgDeleteUserResponse {
+    const message = { ...baseMsgDeleteUserResponse } as MsgDeleteUserResponse
+    return message
+  }
+}
 
 const baseMsgRemoveLiqudity: object = { creator: '', amount: 0 }
 
@@ -809,6 +1197,9 @@ export const MsgDeletePoolResponse = {
 /** Msg defines the Msg service. */
 export interface Msg {
   /** this line is used by starport scaffolding # proto/tx/rpc */
+  CreateUser(request: MsgCreateUser): Promise<MsgCreateUserResponse>
+  UpdateUser(request: MsgUpdateUser): Promise<MsgUpdateUserResponse>
+  DeleteUser(request: MsgDeleteUser): Promise<MsgDeleteUserResponse>
   RemoveLiqudity(request: MsgRemoveLiqudity): Promise<MsgRemoveLiqudityResponse>
   AddLiqudity(request: MsgAddLiqudity): Promise<MsgAddLiqudityResponse>
   CreatePool(request: MsgCreatePool): Promise<MsgCreatePoolResponse>
@@ -821,6 +1212,24 @@ export class MsgClientImpl implements Msg {
   constructor(rpc: Rpc) {
     this.rpc = rpc
   }
+  CreateUser(request: MsgCreateUser): Promise<MsgCreateUserResponse> {
+    const data = MsgCreateUser.encode(request).finish()
+    const promise = this.rpc.request('roberttrifffin.uniswap.uniswap.Msg', 'CreateUser', data)
+    return promise.then((data) => MsgCreateUserResponse.decode(new Reader(data)))
+  }
+
+  UpdateUser(request: MsgUpdateUser): Promise<MsgUpdateUserResponse> {
+    const data = MsgUpdateUser.encode(request).finish()
+    const promise = this.rpc.request('roberttrifffin.uniswap.uniswap.Msg', 'UpdateUser', data)
+    return promise.then((data) => MsgUpdateUserResponse.decode(new Reader(data)))
+  }
+
+  DeleteUser(request: MsgDeleteUser): Promise<MsgDeleteUserResponse> {
+    const data = MsgDeleteUser.encode(request).finish()
+    const promise = this.rpc.request('roberttrifffin.uniswap.uniswap.Msg', 'DeleteUser', data)
+    return promise.then((data) => MsgDeleteUserResponse.decode(new Reader(data)))
+  }
+
   RemoveLiqudity(request: MsgRemoveLiqudity): Promise<MsgRemoveLiqudityResponse> {
     const data = MsgRemoveLiqudity.encode(request).finish()
     const promise = this.rpc.request('roberttrifffin.uniswap.uniswap.Msg', 'RemoveLiqudity', data)

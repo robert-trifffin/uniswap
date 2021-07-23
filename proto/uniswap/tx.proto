@@ -2,6 +2,7 @@ syntax = "proto3";
 package roberttrifffin.uniswap.uniswap;
 
 // this line is used by starport scaffolding # proto/tx/import
+import "uniswap/user.proto";
 import "uniswap/pool.proto";
 
 option go_package = "github.com/robert-trifffin/uniswap/x/uniswap/types";
@@ -9,6 +10,9 @@ option go_package = "github.com/robert-trifffin/uniswap/x/uniswap/types";
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
+  rpc CreateUser(MsgCreateUser) returns (MsgCreateUserResponse);
+  rpc UpdateUser(MsgUpdateUser) returns (MsgUpdateUserResponse);
+  rpc DeleteUser(MsgDeleteUser) returns (MsgDeleteUserResponse);
   rpc RemoveLiqudity(MsgRemoveLiqudity) returns (MsgRemoveLiqudityResponse);
   rpc AddLiqudity(MsgAddLiqudity) returns (MsgAddLiqudityResponse);
   rpc CreatePool(MsgCreatePool) returns (MsgCreatePoolResponse);
@@ -17,6 +21,30 @@ service Msg {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
+message MsgCreateUser {
+  string creator = 1;
+  uint64 amount = 2;
+}
+
+message MsgCreateUserResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateUser {
+  string creator = 1;
+  uint64 id = 2;
+  uint64 amount = 3;
+}
+
+message MsgUpdateUserResponse { }
+
+message MsgDeleteUser {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteUserResponse { }
+
 message MsgRemoveLiqudity {
   string creator = 1;
   uint64 amount = 2;

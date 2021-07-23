@@ -33,7 +33,27 @@ func (k msgServer) AddLiqudity(goCtx context.Context, msg *types.MsgAddLiqudity)
 		liquidity = uint64(math.Min(float64(_amount0*totalSupply/reserve0), float64(_amount1*totalSupply/reserve1)))
 	}
 
-	_ = liquidity
+	var queryUser types.User
+	isExist := false
+	for _, user := range k.GetAllUser(ctx) {
+		if user.Creator == msg.Creator {
+			queryUser = user
+			isExist = true
+		}
+	}
+
+	if !isExist {
+		var newUser = types.User{
+			Creator: msg.Creator,
+			Amount:  liquidity,
+		}
+		k.AppendUser(ctx, newUser)
+	} else {
+		queryUser.Amount += liquidity
+		k.SetUser(ctx, queryUser)
+	}
+
+	totalSupply += liquidity
 	newAmount1 := pool.Amount1 + _amount0
 	newAmount2 := pool.Amount1 + _amount1
 

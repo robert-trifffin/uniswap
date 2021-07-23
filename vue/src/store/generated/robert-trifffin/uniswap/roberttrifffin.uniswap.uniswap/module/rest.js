@@ -150,5 +150,34 @@ export class Api extends HttpClient {
             format: "json",
             ...params,
         });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryUserAll
+         * @summary Queries a list of user items.
+         * @request GET:/robert-trifffin/uniswap/uniswap/user
+         */
+        this.queryUserAll = (query, params = {}) => this.request({
+            path: `/robert-trifffin/uniswap/uniswap/user`,
+            method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryUser
+         * @summary Queries a user by id.
+         * @request GET:/robert-trifffin/uniswap/uniswap/user/{id}
+         */
+        this.queryUser = (id, params = {}) => this.request({
+            path: `/robert-trifffin/uniswap/uniswap/user/${id}`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
     }
 }
